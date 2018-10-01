@@ -15,4 +15,5 @@
     <!-- SPLASH -->
     <string name="logo_title">Logo Application</string>
     <string name="background_description">black transparent background</string>
+    <string name="fragment_not_implemented">Fragment not implemented</string>
 </resources>
