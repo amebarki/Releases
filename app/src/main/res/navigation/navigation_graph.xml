@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/releaseFragment">
+
+    <fragment
+        android:id="@+id/releaseFragment"
+        android:name="com.manga.mebaad.mangarelease.ui.fragment.ReleaseFragment"
+        android:label="fragment_release"
+        tools:layout="@layout/fragment_release" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.manga.mebaad.mangarelease.ui.fragment.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.manga.mebaad.mangarelease.ui.fragment.LibraryFragment"
+        android:label="fragment_library"
+        tools:layout="@layout/fragment_library" />
+</navigation>
