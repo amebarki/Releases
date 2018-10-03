@@ -33,7 +33,7 @@ class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener:
 }
 
 
-class ReleaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ReleaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val summaryTextView: TextView
     private val titleTextView: TextView

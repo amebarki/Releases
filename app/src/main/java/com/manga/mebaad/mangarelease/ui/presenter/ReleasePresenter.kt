@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class ReleasePresenter(val context : Context, val releaseView: ReleaseView){
+class ReleasePresenter(val releaseView: ReleaseView){
 
     private  var releasesList : MutableList<Release> = mutableListOf()
     val apiService = MangaApplication.getApiMangaService()

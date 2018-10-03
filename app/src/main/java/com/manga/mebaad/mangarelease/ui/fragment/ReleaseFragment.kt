@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
 import com.manga.mebaad.mangarelease.data.model.Release
@@ -45,12 +44,17 @@ class ReleaseFragment : Fragment(), ReleaseView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        releasePresenter = Navigator.Instance().initReleasePresenter(activity!!.applicationContext, this)
-        releasePresenter.loadSeinenKurokawa()
-        releasePresenter.loadShonenKurokawa()
+        releasePresenter = Navigator.Instance().initReleasePresenter(this)
+
         return inflater.inflate(R.layout.fragment_release, container, false)
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        releasePresenter.loadSeinenKurokawa()
+        releasePresenter.loadShonenKurokawa()
+    }
 
     private fun releaseItemClicked(release : Release,isChecked : Boolean){
         activity!!.showToast("Clicked : ${release.title}, favorite : ${isChecked}")
