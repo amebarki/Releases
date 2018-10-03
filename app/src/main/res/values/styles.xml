@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="BlackText">
+        <item name="android:fontFamily">@font/jacques_francois_shadow</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/Black</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

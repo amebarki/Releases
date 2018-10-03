@@ -13,4 +13,5 @@ interface MangaManager {
 
     fun retrieveSummary(description: String) : String
 
+    fun addManga(title : String)
 }

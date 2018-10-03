@@ -18,8 +18,9 @@ object RssRepositoryImpl : RssRepository {
     }
 
 
-    override fun loadShonenKurokawa(apiService: ApiMangaService): Single<RSSObject> {
-        return apiService.loadShonenKurokawa()
+    override fun loadShonenKurokawa(apiService: ApiMangaService): Single<List<Item>> {
+        var rssObject : Single<RSSObject> = apiService.loadShonenKurokawa()
+        return rssObject.map { it.items }
     }
 
 

@@ -13,5 +13,5 @@ interface RssRepository {
 
      fun loadSeinenKurokawa(apiService: ApiMangaService) : Single<List<Item>>
 
-    fun loadShonenKurokawa(apiService: ApiMangaService) : Single<RSSObject>
+    fun loadShonenKurokawa(apiService: ApiMangaService) : Single<List<Item>>
 }
