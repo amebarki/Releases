@@ -53,6 +53,7 @@ class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener:
         titleTextView.text = release.title
         summaryTextView.text = release.summary
         summaryTextView.movementMethod = ScrollingMovementMethod()
+        summaryTextView.isSelected = true
         categoryTextView.text = release.category.toString()
         Picasso.with(coverImageView.context).load(release.urlCover).centerCrop().fit().into(coverImageView)
         favoriteCheckBox.setOnClickListener { clickListener(release,favoriteCheckBox.isChecked) }

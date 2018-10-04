@@ -8,13 +8,13 @@
     tools:context=".ui.activity.HomeActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/activity_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_alignParentStart="true"
-        android:background="@drawable/toolbar_background"
-        style="@style/AppTheme" />
+        style="@style/HeaderBar"
+         />
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/activity_toolbar"
         app:layout_constraintBottom_toTopOf="@id/home_bottom_navigation"
         app:navGraph="@navigation/navigation_graph" />
 

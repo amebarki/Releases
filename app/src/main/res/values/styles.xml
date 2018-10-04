@@ -8,6 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+<style name="HeaderBar" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:background">@drawable/toolbar_background</item>
+</style>
+
 
     <style name="BlackText">
         <item name="android:fontFamily">@font/jacques_francois_shadow</item>

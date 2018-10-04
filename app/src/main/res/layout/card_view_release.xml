@@ -12,6 +12,7 @@
     app:cardElevation="2dp">
 
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -19,11 +20,10 @@
         <TextView
             android:id="@+id/release_title_text_view_card"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:gravity="center"
-            android:padding="20dp"
             style="@style/BlackText"
-            android:textSize="22sp"
+            android:textSize="20sp"
             tools:text="example of text of card view" />
 
         <ImageView
@@ -34,24 +34,28 @@
             android:scaleType="centerCrop"
             tools:src="@drawable/splash_logo" />
 
-        <TextView
-            android:id="@+id/release_summary_text_view_card"
-            style="@style/BlackText"
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:fontFamily="@font/jacques_francois"
-            android:gravity="center"
-            android:maxLines="5"
-            android:scrollbars="vertical"
-            tools:text="example of text of card view" />
+            android:layout_height="110dp"
+            android:fillViewport="true">
+            <TextView
+                android:id="@+id/release_summary_text_view_card"
+                style="@style/BlackText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/jacques_francois"
+                android:scrollbars="vertical"
+                tools:text="example of text of card view" />
+        </android.support.v4.widget.NestedScrollView>
+
 
         <TextView
             android:id="@+id/release_category_text_view_card"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:gravity="center"
             style="@style/BlackText"
-            android:textSize="22sp"
+            android:textSize="20sp"
             tools:text="example of text of card view"
 
             />
