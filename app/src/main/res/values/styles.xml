@@ -10,6 +10,7 @@
 
 <style name="HeaderBar" parent="Theme.AppCompat.Light.DarkActionBar">
     <item name="android:background">@drawable/toolbar_background</item>
+    <item name="android:titleTextColor">@color/colorOrangered</item>
 </style>
 
 
