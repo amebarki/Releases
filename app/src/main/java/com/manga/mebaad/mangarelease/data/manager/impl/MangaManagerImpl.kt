@@ -11,11 +11,10 @@ class MangaManagerImpl : MangaManager {
     override fun createListRelease(items: List<Item>, category: Category): List<Release> {
 
         var releases: MutableList<Release> = mutableListOf()
-        if (items != null) {
+
             for (item in items) {
                 releases.add(Release(item.title,retrieveUrlCover(item.description),retrieveSummary(item.description),category))
             }
-        }
         return releases
     }
 

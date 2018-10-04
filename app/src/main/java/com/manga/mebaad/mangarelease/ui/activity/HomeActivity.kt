@@ -24,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         toolbar = findViewById(R.id.activity_toolbar)
+        toolbar.title = "Manga Releases"
         setSupportActionBar(toolbar)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -34,22 +35,9 @@ class HomeActivity : AppCompatActivity() {
 
 
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.top_menu_toolbar, menu)
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.getItemId()
-
-
-        if (id == R.id.action_favorite) {
-            Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
 }
