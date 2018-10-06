@@ -19,7 +19,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
 
 
     private lateinit var releasePresenter: ReleasePresenter
-
+    private lateinit var releaseMenu : Menu
 
     override fun showXmlExample() {
         activity?.showToast("showExample")
@@ -69,8 +69,11 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu!!.findItem(R.id.action_sort).isVisible = true
-        menu.findItem(R.id.action_edit).isVisible = false
+        releaseMenu = menu!!
+        releaseMenu.findItem(R.id.action_sort).isVisible = true
+        releaseMenu.findItem(R.id.action_edit).isVisible = false
+        releaseMenu.findItem(R.id.action_cancel).isVisible = false
+        releaseMenu.findItem(R.id.action_confirm).isVisible = false
     }
 
 

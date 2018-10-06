@@ -3,47 +3,80 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
+import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.ui.adapter.LibraryAdapter
 import com.manga.mebaad.mangarelease.ui.presenter.LibraryPresenter
 import com.manga.mebaad.mangarelease.ui.view.LibraryView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_library.*
 
 
 class LibraryFragment : BaseFragment(), LibraryView {
 
+
     private lateinit var libraryPresenter: LibraryPresenter
+    private lateinit var libraryAdapter: LibraryAdapter
+    private lateinit var libraryMenu : Menu
 
-    private var mangaList: MutableList<String> = mutableListOf()
 
+    //region [** VIEW METHODS **]
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        //libraryPresenter = Navigator.Instance().initLibraryPresenter(this)
-        initList()
         overwriteToolbar()
+
+        libraryPresenter = Navigator.Instance().initLibraryPresenter(this)
+
+
+
         return inflater.inflate(R.layout.fragment_library, container, false)
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        libraryPresenter.retrieveLibrary()
+    }
+    //endregion
 
-        var library_recycler_view = view.findViewById<RecyclerView>(R.id.library_recycler_view)
+
+    //region [** INTERFACE METHODS **]
+    override fun DisplayMangas(mangas: List<String>) {
+
+        libraryAdapter = LibraryAdapter(mangas,View.INVISIBLE,true) { mangaTitle: String, position: Int, isChecked : Boolean -> mangaItemClicked(mangaTitle, position,isChecked) }
         library_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.VERTICAL, false)
-        library_recycler_view.adapter = LibraryAdapter(mangaList, { mangaTitle: String, position: Int -> mangaItemClicked(mangaTitle, position) })
+        library_recycler_view.adapter = libraryAdapter
+    }
+
+    override fun DisplayEditMode(itemState: Boolean, editState: Int) {
+        libraryMenu.findItem(R.id.action_confirm).isVisible = itemState
+        libraryMenu.findItem(R.id.action_cancel).isVisible = itemState
+        libraryMenu.findItem(R.id.action_edit).isVisible = !itemState
+
+        libraryAdapter.visibility = editState
+        libraryAdapter.initArray = true
+        library_recycler_view.adapter.notifyDataSetChanged()
+
     }
 
 
-    private fun mangaItemClicked(mangaTitle: String, position: Int) {
-        activity!!.showToast("Clicked : ${mangaTitle}, position : ${position}")
+    //endregion
 
+
+    //region [** ITEMS METHODS **]
+
+    private fun mangaItemClicked(mangaTitle: String, position: Int,isChecked : Boolean) {
+
+        activity!!.showToast("Clicked : $mangaTitle, position : $position, isChecked : $isChecked")
     }
 
+    //endregion
+
+
+    //region [** OPTIONS MENU METHODS **]
 
     override fun overwriteToolbar() {
         activity!!.activity_toolbar.title = "My Library"
@@ -53,36 +86,37 @@ class LibraryFragment : BaseFragment(), LibraryView {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        menu!!.findItem(R.id.action_sort).isVisible = false
-        menu.findItem(R.id.action_edit).isVisible = true
-    }
+        libraryMenu = menu!!
+        libraryMenu.findItem(R.id.action_sort).isVisible = false
+        libraryMenu.findItem(R.id.action_edit).isVisible = true
+        libraryMenu.findItem(R.id.action_cancel).isVisible = false
+        libraryMenu.findItem(R.id.action_confirm).isVisible = false
 
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
-        if (item.itemId == R.id.action_edit) {
-            activity!!.showToast("Edit Action")
+        when (item.itemId){
+            R.id.action_edit ->{
+                libraryPresenter.launchEdit()
+                activity!!.showToast("Edit Action")
+            }
+            R.id.action_confirm->{
+                activity!!.showToast("Confirm Edit Action")
+                libraryPresenter.confirmEdit()
+            }
+            R.id.action_cancel->{
+                activity!!.showToast("Cancel Edit Action")
+                libraryPresenter.cancelEdit()
+            }
+            else-> {
+                activity!!.showToast("Error")
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    //endregion
 
-    private fun initList() {
-        Log.d("LIBRARY", "INIT LIST")
-        mangaList.add("One Piece")
-        mangaList.add("Rudolf Turkey")
-        mangaList.add("Kingdom")
-        mangaList.add("Eyeshield 21")
-        mangaList.add("Arms Peddler")
-        mangaList.add("Saint Seiya - The Lost Canvas - Chronicles")
-        mangaList.add("Platinum End")
-        mangaList.add("Jackals")
-        mangaList.add("Warlords")
-        mangaList.add("Tsubasa Reservoir Chronicles")
-        mangaList.add("Beelzebub")
-        mangaList.add("One Punch Man")
-        mangaList.add("Blood Lad")
-        mangaList.add("Sun Ken Rock")
-        mangaList.add("Origin")
-    }
+
 }

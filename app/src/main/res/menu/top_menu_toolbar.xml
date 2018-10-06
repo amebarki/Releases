@@ -7,15 +7,30 @@
     <item
         android:id="@+id/action_sort"
         android:orderInCategory="300"
-        android:title="User"
+        android:title="Sort"
         android:icon="@drawable/ic_sort"
         app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_edit"
         android:orderInCategory="300"
-        android:title="User"
+        android:title="Edit"
         android:icon="@drawable/ic_edit"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_cancel"
+        android:orderInCategory="300"
+        android:title="Cancel"
+        android:icon="@drawable/ic_cancel"
+        app:showAsAction="ifRoom"/>
+
+
+    <item
+        android:id="@+id/action_confirm"
+        android:orderInCategory="300"
+        android:title="Confirm"
+        android:icon="@drawable/ic_confirm"
         app:showAsAction="ifRoom"/>
 
 
