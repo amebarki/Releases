@@ -4,6 +4,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import androidx.navigation.findNavController
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
@@ -71,6 +72,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
     private fun mangaItemClicked(mangaTitle: String, position: Int,isChecked : Boolean) {
 
         activity!!.showToast("Clicked : $mangaTitle, position : $position, isChecked : $isChecked")
+        view!!.findNavController().navigate(R.id.action_libraryFragment_to_mangaFragment)
     }
 
     //endregion
