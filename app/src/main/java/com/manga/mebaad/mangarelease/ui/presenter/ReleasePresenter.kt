@@ -12,7 +12,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class ReleasePresenter(val releaseView: ReleaseView){
+class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter(){
+
 
     private  var releasesList : MutableList<Release> = mutableListOf()
     val apiService = MangaApplication.getApiMangaService()
@@ -51,4 +52,14 @@ class ReleasePresenter(val releaseView: ReleaseView){
     }
 
 
+    //region [** BASE METHODS **]
+    override fun launchEdit() {
+    }
+
+    override fun cancelEdit() {
+    }
+
+    override fun confirmEdit() {
+    }
+    //endregion
 }

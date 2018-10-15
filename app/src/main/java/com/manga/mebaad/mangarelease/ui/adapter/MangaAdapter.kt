@@ -1,35 +1,74 @@
 package com.manga.mebaad.mangarelease.ui.adapter
 
-import android.content.Context
+import android.support.v7.widget.RecyclerView
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
 import com.manga.mebaad.mangarelease.R
+import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.data.model.Tome
+import com.squareup.picasso.Picasso
 
-class MangaAdapter(internal var context: Context, internal var tomes: List<Tome>) : BaseAdapter() {
+class MangaAdapter(internal var tomes: List<Tome>, var visibility : Int,var initArray : Boolean) : RecyclerView.Adapter<MangaViewHolder>() {
 
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val food = this.tomes[position]
 
-        var inflator = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        var foodView = inflator.inflate(R.layout.card_view_manga, null)
-
-        return foodView
+    companion object {
+        internal var itemStateArray: SparseBooleanArray = SparseBooleanArray()
     }
 
-    override fun getItem(position: Int): Any {
-        return tomes[position]
+
+    override fun onCreateViewHolder(viewGroup: ViewGroup, itemType: Int): MangaViewHolder {
+        val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.card_view_manga, viewGroup, false)
+        return MangaViewHolder(view)
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+    override fun onBindViewHolder(mangaViewHolder: MangaViewHolder, position: Int) {
+
+        if(initArray){
+            LibraryAdapter.itemStateArray.clear()
+            initArray = false
+        }
+
+        val tome= tomes[position]
+        mangaViewHolder.bind(tome)
+        mangaViewHolder.tmpCheckBox.isChecked = MangaAdapter.itemStateArray.get(position, true)
+        mangaViewHolder.tmpCheckBox.visibility = visibility
     }
 
-    override fun getCount(): Int {
+    override fun getItemCount(): Int {
         return tomes.size
     }
 
+}
+
+
+class MangaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    private val titleTomeTextView: TextView
+    private val coverTomeImageView: ImageView
+    val tmpCheckBox: CheckBox = itemView.findViewById(R.id.tome_checkox) as CheckBox
+
+    init {
+        titleTomeTextView = itemView.findViewById(R.id.tome_title_text_view) as TextView
+        coverTomeImageView = itemView.findViewById(R.id.tome_cover_image_view) as ImageView
+    }
+
+    fun bind(tome: Tome) {
+        titleTomeTextView.text = "TOME " + tome.id
+        Picasso.with(coverTomeImageView.context).load(tome.urlCover).fit().into(coverTomeImageView)
+        tmpCheckBox.setOnClickListener {
+            if (!MangaAdapter.itemStateArray.get(adapterPosition, true)) {
+                tmpCheckBox.isChecked = true
+                MangaAdapter.itemStateArray.put(adapterPosition, true)
+            } else {
+                tmpCheckBox.isChecked = false
+                MangaAdapter.itemStateArray.put(adapterPosition, false)
+            }
+        }
+    }
 }

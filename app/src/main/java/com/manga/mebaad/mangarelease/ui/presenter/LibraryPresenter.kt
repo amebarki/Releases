@@ -4,31 +4,15 @@ import android.util.Log
 import android.view.View
 import com.manga.mebaad.mangarelease.ui.view.LibraryView
 
-class LibraryPresenter(val libraryView : LibraryView) {
+class LibraryPresenter(val libraryView : LibraryView) : BasePresenter() {
 
 
     private var mangaList: MutableList<String> = mutableListOf()
 
-
-    fun launchEdit(){
-        libraryView.DisplayEditMode(true,View.VISIBLE)
-    }
-
-    fun cancelEdit(){
-        libraryView.DisplayEditMode(false,View.INVISIBLE)
-    }
-
-    fun confirmEdit(){
-        libraryView.DisplayEditMode(false,View.INVISIBLE)
-    }
-
     fun retrieveLibrary(){
-
         initList()
         libraryView.DisplayMangas(mangaList)
-
     }
-
 
     private fun initList() {
         Log.d("LIBRARY", "INIT LIST")
@@ -48,4 +32,19 @@ class LibraryPresenter(val libraryView : LibraryView) {
         mangaList.add("Sun Ken Rock")
         mangaList.add("Origin")
     }
+
+
+    //region [** BASE METHODS **]
+    override fun launchEdit(){
+        libraryView.DisplayEditMode(true,View.VISIBLE)
+    }
+
+    override fun cancelEdit(){
+        libraryView.DisplayEditMode(false,View.INVISIBLE)
+    }
+
+    override fun confirmEdit(){
+        libraryView.DisplayEditMode(false,View.INVISIBLE)
+    }
+    //endregion
 }

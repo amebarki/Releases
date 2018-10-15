@@ -20,17 +20,14 @@ class LibraryFragment : BaseFragment(), LibraryView {
 
     private lateinit var libraryPresenter: LibraryPresenter
     private lateinit var libraryAdapter: LibraryAdapter
-    private lateinit var libraryMenu : Menu
+    private lateinit var libraryMenu: Menu
 
 
     //region [** VIEW METHODS **]
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         overwriteToolbar()
-
         libraryPresenter = Navigator.Instance().initLibraryPresenter(this)
-
-
 
         return inflater.inflate(R.layout.fragment_library, container, false)
     }
@@ -47,7 +44,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
     //region [** INTERFACE METHODS **]
     override fun DisplayMangas(mangas: List<String>) {
 
-        libraryAdapter = LibraryAdapter(mangas,View.INVISIBLE,true) { mangaTitle: String, position: Int, isChecked : Boolean -> mangaItemClicked(mangaTitle, position,isChecked) }
+        libraryAdapter = LibraryAdapter(mangas, View.INVISIBLE, true) { mangaTitle: String, position: Int, isChecked: Boolean -> mangaItemClicked(mangaTitle, position, isChecked) }
         library_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.VERTICAL, false)
         library_recycler_view.adapter = libraryAdapter
     }
@@ -62,15 +59,12 @@ class LibraryFragment : BaseFragment(), LibraryView {
         library_recycler_view.adapter.notifyDataSetChanged()
 
     }
-
-
     //endregion
 
 
     //region [** ITEMS METHODS **]
 
-    private fun mangaItemClicked(mangaTitle: String, position: Int,isChecked : Boolean) {
-
+    private fun mangaItemClicked(mangaTitle: String, position: Int, isChecked: Boolean) {
         activity!!.showToast("Clicked : $mangaTitle, position : $position, isChecked : $isChecked")
         view!!.findNavController().navigate(R.id.action_libraryFragment_to_mangaFragment)
     }
@@ -82,9 +76,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
 
     override fun overwriteToolbar() {
         activity!!.activity_toolbar.title = "My Library"
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -97,21 +89,20 @@ class LibraryFragment : BaseFragment(), LibraryView {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId){
-            R.id.action_edit ->{
+        when (item.itemId) {
+            R.id.action_edit -> {
                 libraryPresenter.launchEdit()
                 activity!!.showToast("Edit Action")
             }
-            R.id.action_confirm->{
+            R.id.action_confirm -> {
                 activity!!.showToast("Confirm Edit Action")
                 libraryPresenter.confirmEdit()
             }
-            R.id.action_cancel->{
+            R.id.action_cancel -> {
                 activity!!.showToast("Cancel Edit Action")
                 libraryPresenter.cancelEdit()
             }
-            else-> {
+            else -> {
                 activity!!.showToast("Error")
             }
         }
