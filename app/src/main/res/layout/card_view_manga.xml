@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/tome_root_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerInParent="true"
-    android:layout_marginEnd="16dp"
+    android:layout_gravity="center"
     android:layout_marginStart="16dp"
-    android:layout_marginBottom="16dp"
-    android:layout_gravity="center">
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="16dp">
 
     <LinearLayout
         android:id="@+id/tome_linear_layout"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <ImageView
             android:id="@+id/tome_cover_image_view"
             android:layout_width="150dp"
@@ -23,25 +24,23 @@
             android:layout_gravity="center"
             android:scaleType="centerCrop"
             tools:src="@drawable/splash_logo" />
+
         <TextView
             android:id="@+id/tome_title_text_view"
+            style="@style/BlackText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            style="@style/BlackText"
-            tools:text="@string/app_name"
-            />
-
-        <CheckBox
-            android:id="@+id/tome_checkox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="center"
-            android:button="@drawable/edit_button"
-            android:checked="true"
-            />
+            tools:text="@string/app_name" />
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/tome_checkbox"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector_background_tome"
+        android:button="@drawable/selector_background_tome"
+        android:checked="false"
+
+        />
 </android.support.v7.widget.CardView>

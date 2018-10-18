@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -8,10 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-<style name="HeaderBar" parent="Theme.AppCompat.Light.DarkActionBar">
-    <item name="android:background">@drawable/toolbar_background</item>
-    <item name="android:titleTextColor">@color/colorOrangered</item>
-</style>
+    <style name="HeaderBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:background">@drawable/toolbar_background</item>
+        <item name="android:titleTextColor" tools:targetApi="m">@color/colorOrangered</item>
+    </style>
 
 
     <style name="BlackText">
@@ -21,5 +21,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
+
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/colorTransparentGrey</item>
+        <item name="colorControlActivated">@color/colorTransparentGreen</item>
+    </style>
+
 
 </resources>

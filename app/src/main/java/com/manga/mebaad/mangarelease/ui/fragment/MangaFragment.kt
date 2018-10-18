@@ -50,7 +50,7 @@ class MangaFragment : BaseFragment(), MangaView {
     //region [** INTERFACE METHODS **]
 
     override fun DisplayMangas(mangas: List<Tome>) {
-        mangaAdapter = MangaAdapter(mangas, View.INVISIBLE, true)
+        mangaAdapter = MangaAdapter(mangas, View.INVISIBLE, true){ tomeId: Int, position: Int, isChecked: Boolean -> tomeItemClicked(tomeId, position, isChecked) }
 
         manga_grid_layout.layoutManager = GridLayoutManager(activity!!.applicationContext, 3)
         manga_grid_layout.adapter = mangaAdapter
@@ -74,7 +74,7 @@ class MangaFragment : BaseFragment(), MangaView {
 
     //region [** ITEMS METHODS **]
     private fun tomeItemClicked(tomeNumber: Int, position: Int, isChecked: Boolean) {
-        activity!!.showToast("Clicked : $tomeNumber, position : $position, isChecked : $isChecked")
+        activity!!.showToast("Clicked : tome $tomeNumber, position : $position, isChecked : $isChecked")
         // open dialog box to display detail of tome
     }
     //endregion

@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
-            android:button="@drawable/favorite_button" />
+            android:button="@drawable/selector_favorite" />
 
     </LinearLayout>
 

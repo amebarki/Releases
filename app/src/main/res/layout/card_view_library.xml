@@ -41,7 +41,7 @@
             app:layout_constraintBottom_toBottomOf="@id/library_constraint_layout"
             app:layout_constraintTop_toTopOf="@id/library_constraint_layout"
             app:layout_constraintEnd_toEndOf="@id/library_constraint_layout"
-            android:button="@drawable/edit_button"
+            android:button="@drawable/selector_manga"
             android:checked="true"
             />
 
