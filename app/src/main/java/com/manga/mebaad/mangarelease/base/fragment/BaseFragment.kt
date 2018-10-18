@@ -1,4 +1,4 @@
-package com.manga.mebaad.mangarelease.ui.fragment
+package com.manga.mebaad.mangarelease.base.fragment
 
 import android.support.v4.app.Fragment
 

@@ -13,9 +13,9 @@ import io.reactivex.Single
 /**
  * Created by Adam on 24/09/2018.
  */
-class LoadSeinenKurokawaUseCase(val apiService: ApiMangaService) : SingleUseCase<List<Release>> {
+class LoadSeinenKurokawaUseCase(private val apiService: ApiMangaService) : SingleUseCase<List<Release>> {
 
-    val mangaManager: MangaManager = Navigator.Instance().getMangaManager()
+    private val mangaManager: MangaManager = Navigator.instance().getMangaManager()
 
 
     override fun execute(): Single<List<Release>> = (RssRepositoryImpl as RssRepository).loadSeinenKurokawa(apiService).map {

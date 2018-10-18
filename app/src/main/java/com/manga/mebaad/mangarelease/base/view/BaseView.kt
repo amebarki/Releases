@@ -16,6 +16,6 @@ interface BaseView {
         Log.e("BaseView", "showError: $errorMessage")
     }
 
-    fun DisplayEditMode(itemState : Boolean, editState : Int){}
+    fun displayEditMode(itemState : Boolean, editState : Int){}
 
 }

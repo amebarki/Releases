@@ -1,9 +1,8 @@
 package com.manga.mebaad.mangarelease.ui.presenter
 
-import android.content.Context
 import com.manga.mebaad.mangarelease.MangaApplication
+import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
 import com.manga.mebaad.mangarelease.domain.UseCase.LoadSeinenKurokawaUseCase
-import com.manga.mebaad.mangarelease.data.model.Item
 import com.manga.mebaad.mangarelease.data.model.Release
 import com.manga.mebaad.mangarelease.domain.UseCase.LoadShonenKurokawaUseCase
 import com.manga.mebaad.mangarelease.ui.view.ReleaseView
@@ -16,7 +15,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter(){
 
 
     private  var releasesList : MutableList<Release> = mutableListOf()
-    val apiService = MangaApplication.getApiMangaService()
+    private val apiService = MangaApplication.getApiMangaService()
 
 
     fun loadSeinenKurokawa(){
@@ -37,7 +36,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter(){
     }
 
     fun loadShonenKurokawa(){
-        LoadShonenKurokawaUseCase(apiService).execute()
+        LoadShonenKurokawaUseCase(this.apiService).execute()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object  : SingleObserver<List<Release>>{

@@ -7,6 +7,7 @@ import android.view.*
 import androidx.navigation.findNavController
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
+import com.manga.mebaad.mangarelease.base.fragment.BaseFragment
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.ui.adapter.LibraryAdapter
 import com.manga.mebaad.mangarelease.ui.presenter.LibraryPresenter
@@ -27,7 +28,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         overwriteToolbar()
-        libraryPresenter = Navigator.Instance().initLibraryPresenter(this)
+        libraryPresenter = Navigator.instance().initLibraryPresenter(this)
 
         return inflater.inflate(R.layout.fragment_library, container, false)
     }
@@ -42,14 +43,14 @@ class LibraryFragment : BaseFragment(), LibraryView {
 
 
     //region [** INTERFACE METHODS **]
-    override fun DisplayMangas(mangas: List<String>) {
+    override fun displayMangas(mangas: List<String>) {
 
         libraryAdapter = LibraryAdapter(mangas, View.INVISIBLE, true) { mangaTitle: String, position: Int, isChecked: Boolean -> mangaItemClicked(mangaTitle, position, isChecked) }
         library_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.VERTICAL, false)
         library_recycler_view.adapter = libraryAdapter
     }
 
-    override fun DisplayEditMode(itemState: Boolean, editState: Int) {
+    override fun displayEditMode(itemState: Boolean, editState: Int) {
         libraryMenu.findItem(R.id.action_confirm).isVisible = itemState
         libraryMenu.findItem(R.id.action_cancel).isVisible = itemState
         libraryMenu.findItem(R.id.action_edit).isVisible = !itemState

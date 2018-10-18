@@ -1,4 +1,4 @@
-package com.manga.mebaad.mangarelease.ui.presenter
+package com.manga.mebaad.mangarelease.base.presenter
 
 abstract class BasePresenter() {
 

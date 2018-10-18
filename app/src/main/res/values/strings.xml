@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MangaRelease</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hello_library">Hello library fragment</string>
     <string name="hello_release">Hello release fragment</string>
@@ -16,4 +15,11 @@
     <string name="logo_title">Logo Application</string>
     <string name="background_description">black transparent background</string>
     <string name="fragment_not_implemented">Fragment not implemented</string>
+
+    <!-- Release Part -->
+
+    <!-- Manga Part -->
+    <string name="tome_name">TOME %1$d</string>
+
+    <!-- Library Part -->
 </resources>

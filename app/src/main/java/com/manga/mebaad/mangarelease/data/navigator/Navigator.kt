@@ -19,7 +19,7 @@ object Navigator {
     }
 
 
-    fun Instance(): Navigator {
+    fun instance(): Navigator {
 
         return instance!!
     }

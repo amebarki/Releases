@@ -35,21 +35,13 @@ class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener:
 
     class ReleaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val summaryTextView: TextView
-    private val titleTextView: TextView
-    private val categoryTextView: TextView
-    private val coverImageView: ImageView
-    private val favoriteCheckBox: CheckBox
+    private val summaryTextView: TextView = itemView.findViewById(R.id.release_summary_text_view_card) as TextView
+        private val titleTextView: TextView = itemView.findViewById(R.id.release_title_text_view_card) as TextView
+        private val categoryTextView: TextView = itemView.findViewById(R.id.release_category_text_view_card) as TextView
+        private val coverImageView: ImageView = itemView.findViewById(R.id.release_image_card) as ImageView
+        private val favoriteCheckBox: CheckBox = itemView.findViewById(R.id.release_favorite_checkbox_card) as CheckBox
 
-    init {
-        titleTextView = itemView.findViewById(R.id.release_title_text_view_card) as TextView
-        summaryTextView = itemView.findViewById(R.id.release_summary_text_view_card) as TextView
-        categoryTextView = itemView.findViewById(R.id.release_category_text_view_card) as TextView
-        coverImageView = itemView.findViewById(R.id.release_image_card) as ImageView
-        favoriteCheckBox = itemView.findViewById(R.id.release_favorite_checkbox_card) as CheckBox
-    }
-
-    fun bind(release: Release, clickListener: (Release,Boolean) -> Unit) {
+        fun bind(release: Release, clickListener: (Release,Boolean) -> Unit) {
         titleTextView.text = release.title
         summaryTextView.text = release.summary
         summaryTextView.movementMethod = ScrollingMovementMethod()

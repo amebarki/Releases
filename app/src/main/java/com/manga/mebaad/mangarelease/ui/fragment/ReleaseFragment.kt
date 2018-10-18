@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
+import com.manga.mebaad.mangarelease.base.fragment.BaseFragment
 import com.manga.mebaad.mangarelease.data.model.Release
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.ui.adapter.ReleaseAdapter
@@ -27,7 +28,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         overwriteToolbar()
-        releasePresenter = Navigator.Instance().initReleasePresenter(this)
+        releasePresenter = Navigator.instance().initReleasePresenter(this)
 
         return inflater.inflate(R.layout.fragment_release, container, false)
     }
@@ -45,7 +46,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     //region [** INTERFACE METHODS **]
     override fun showListRelease(releases: List<Release>) {
         release_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false)
-        release_recycler_view.adapter = ReleaseAdapter(releases, { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) })
+        release_recycler_view.adapter = ReleaseAdapter(releases) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
     }
     //endregion
 

@@ -2,9 +2,6 @@ package com.manga.mebaad.mangarelease.api.service
 
 import com.manga.mebaad.mangarelease.data.model.RSSObject
 import io.reactivex.Single
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 

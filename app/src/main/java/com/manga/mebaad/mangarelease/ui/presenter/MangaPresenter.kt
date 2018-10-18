@@ -1,6 +1,7 @@
 package com.manga.mebaad.mangarelease.ui.presenter
 
 import android.view.View
+import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
 import com.manga.mebaad.mangarelease.data.model.Tome
 import com.manga.mebaad.mangarelease.ui.view.MangaView
 
@@ -12,7 +13,7 @@ class MangaPresenter(val mangaView: MangaView) : BasePresenter() {
 
     fun retrieveManga() {
         initTomes()
-        mangaView.DisplayMangas(tomes)
+        mangaView.displayMangas(tomes)
     }
 
     private fun initTomes() {
@@ -39,15 +40,15 @@ class MangaPresenter(val mangaView: MangaView) : BasePresenter() {
 
     //region [** BASE METHODS **]
     override fun launchEdit() {
-        mangaView.DisplayEditMode(true, View.VISIBLE)
+        mangaView.displayEditMode(true, View.VISIBLE)
     }
 
     override fun cancelEdit() {
-        mangaView.DisplayEditMode(false, View.INVISIBLE)
+        mangaView.displayEditMode(false, View.INVISIBLE)
     }
 
     override fun confirmEdit() {
-        mangaView.DisplayEditMode(false, View.INVISIBLE)
+        mangaView.displayEditMode(false, View.INVISIBLE)
     }
     //endregion
 }

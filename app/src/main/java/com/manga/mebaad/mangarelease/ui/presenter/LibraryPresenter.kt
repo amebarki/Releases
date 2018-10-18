@@ -2,6 +2,7 @@ package com.manga.mebaad.mangarelease.ui.presenter
 
 import android.util.Log
 import android.view.View
+import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
 import com.manga.mebaad.mangarelease.ui.view.LibraryView
 
 class LibraryPresenter(val libraryView : LibraryView) : BasePresenter() {
@@ -11,7 +12,7 @@ class LibraryPresenter(val libraryView : LibraryView) : BasePresenter() {
 
     fun retrieveLibrary(){
         initList()
-        libraryView.DisplayMangas(mangaList)
+        libraryView.displayMangas(mangaList)
     }
 
     private fun initList() {
@@ -36,15 +37,15 @@ class LibraryPresenter(val libraryView : LibraryView) : BasePresenter() {
 
     //region [** BASE METHODS **]
     override fun launchEdit(){
-        libraryView.DisplayEditMode(true,View.VISIBLE)
+        libraryView.displayEditMode(true,View.VISIBLE)
     }
 
     override fun cancelEdit(){
-        libraryView.DisplayEditMode(false,View.INVISIBLE)
+        libraryView.displayEditMode(false,View.INVISIBLE)
     }
 
     override fun confirmEdit(){
-        libraryView.DisplayEditMode(false,View.INVISIBLE)
+        libraryView.displayEditMode(false,View.INVISIBLE)
     }
     //endregion
 }

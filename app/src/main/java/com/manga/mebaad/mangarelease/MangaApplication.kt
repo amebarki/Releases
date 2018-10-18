@@ -22,7 +22,7 @@ class MangaApplication : Application() {
         private lateinit var apiMangaService : ApiMangaService
         private var instance: MangaApplication? = null
 
-        fun Instance(): Application {
+        fun instance(): Application {
 
             return instance!!
         }
@@ -56,7 +56,7 @@ class MangaApplication : Application() {
                 )
                 .build()
         apiMangaService = retrofit.create(ApiMangaService::class.java)
-        Navigator.Instance().init()
+        Navigator.instance().init()
     }
 
 

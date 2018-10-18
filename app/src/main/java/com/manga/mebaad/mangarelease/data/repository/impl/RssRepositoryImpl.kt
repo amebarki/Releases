@@ -13,13 +13,13 @@ object RssRepositoryImpl : RssRepository {
 
 
     override fun loadSeinenKurokawa(apiService: ApiMangaService): Single<List<Item>> {
-        var rssObject : Single<RSSObject> = apiService.loadSeinenKurokawa()
+        val rssObject : Single<RSSObject> = apiService.loadSeinenKurokawa()
         return rssObject.map { it.items }
     }
 
 
     override fun loadShonenKurokawa(apiService: ApiMangaService): Single<List<Item>> {
-        var rssObject : Single<RSSObject> = apiService.loadShonenKurokawa()
+        val rssObject : Single<RSSObject> = apiService.loadShonenKurokawa()
         return rssObject.map { it.items }
     }
 
