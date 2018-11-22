@@ -1,6 +1,6 @@
 package com.manga.mebaad.mangarelease.ui.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.ui.adapter.LibraryAdapter.Companion.itemStateArray
 
-class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, var initArray : Boolean, private val clickListener: (String, Int, Boolean) -> Unit) : RecyclerView.Adapter<LibraryViewHolder>() {
+class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, var initArray : Boolean, private val clickListener: (String, Int, Boolean) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<LibraryViewHolder>() {
 
 
     companion object {
@@ -44,7 +44,7 @@ class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, 
 }
 
 
-class LibraryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class LibraryViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     private val titleTextView: TextView = itemView.findViewById(R.id.library_title_text_view) as TextView
     val deleteCheckbox: CheckBox = itemView.findViewById(R.id.library_delete_checkbox) as CheckBox

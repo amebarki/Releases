@@ -2,11 +2,12 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
 import com.manga.mebaad.mangarelease.base.fragment.BaseFragment
+import com.manga.mebaad.mangarelease.data.model.Category
+import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.data.model.Tome
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.ui.adapter.MangaAdapter
@@ -22,7 +23,6 @@ class MangaFragment : BaseFragment(), MangaView {
     private lateinit var mangaMenu: Menu
     private lateinit var mangaPresenter: MangaPresenter
     private lateinit var mangaAdapter: MangaAdapter
-
 
     //region [** VIEW METHODS **]
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +41,9 @@ class MangaFragment : BaseFragment(), MangaView {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         mangaPresenter.retrieveManga()
-
+        mangaPresenter.getAllMangas()
     }
+
     //endregion
 
     //region [** INTERFACE METHODS **]
@@ -50,7 +51,7 @@ class MangaFragment : BaseFragment(), MangaView {
     override fun displayMangas(mangas: List<Tome>) {
         mangaAdapter = MangaAdapter(mangas, View.INVISIBLE, true){ tomeId: Int, position: Int, isChecked: Boolean -> tomeItemClicked(tomeId, position, isChecked) }
 
-        manga_grid_layout.layoutManager = GridLayoutManager(activity!!.applicationContext, 3)
+        manga_grid_layout.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity!!.applicationContext, 3)
         manga_grid_layout.adapter = mangaAdapter
         manga_title_text_view.text = "Example of Manga"
 
@@ -64,7 +65,7 @@ class MangaFragment : BaseFragment(), MangaView {
         mangaAdapter.visibility = editState
         mangaAdapter.initArray = true
 
-        manga_grid_layout.adapter.notifyDataSetChanged()
+        manga_grid_layout.adapter!!.notifyDataSetChanged()
 
     }
     //endregion

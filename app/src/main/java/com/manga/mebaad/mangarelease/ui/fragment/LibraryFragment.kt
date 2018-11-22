@@ -2,7 +2,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import androidx.navigation.findNavController
 import com.manga.mebaad.mangarelease.R
@@ -46,7 +46,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
     override fun displayMangas(mangas: List<String>) {
 
         libraryAdapter = LibraryAdapter(mangas, View.INVISIBLE, true) { mangaTitle: String, position: Int, isChecked: Boolean -> mangaItemClicked(mangaTitle, position, isChecked) }
-        library_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.VERTICAL, false)
+        library_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext, androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
         library_recycler_view.adapter = libraryAdapter
     }
 
@@ -57,7 +57,7 @@ class LibraryFragment : BaseFragment(), LibraryView {
 
         libraryAdapter.visibility = editState
         libraryAdapter.initArray = true
-        library_recycler_view.adapter.notifyDataSetChanged()
+        library_recycler_view.adapter!!.notifyDataSetChanged()
 
     }
     //endregion

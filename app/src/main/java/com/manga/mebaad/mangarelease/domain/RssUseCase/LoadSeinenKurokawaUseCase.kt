@@ -1,4 +1,4 @@
-package com.manga.mebaad.mangarelease.domain.UseCase
+package com.manga.mebaad.mangarelease.domain.RssUseCase
 
 import com.manga.mebaad.mangarelease.api.service.ApiMangaService
 import com.manga.mebaad.mangarelease.base.usecase.SingleUseCase
@@ -10,11 +10,16 @@ import com.manga.mebaad.mangarelease.data.repository.contract.RssRepository
 import com.manga.mebaad.mangarelease.data.repository.impl.RssRepositoryImpl
 import io.reactivex.Single
 
-class LoadShonenKurokawaUseCase(private val apiService: ApiMangaService) : SingleUseCase<List<Release>> {
+/**
+ * Created by Adam on 24/09/2018.
+ */
+class LoadSeinenKurokawaUseCase(private val apiService: ApiMangaService) : SingleUseCase<List<Release>> {
 
     private val mangaManager: MangaManager = Navigator.instance().getMangaManager()
 
-    override fun execute(): Single<List<Release>> = (RssRepositoryImpl as RssRepository).loadShonenKurokawa(apiService).map {
-        return@map mangaManager.createListRelease(it, Category.SHONEN)
+
+    override fun execute(): Single<List<Release>> = (RssRepositoryImpl as RssRepository).loadSeinenKurokawa(apiService).map {
+        return@map mangaManager.createListRelease(it, Category.SEINEN)
     }
+
 }

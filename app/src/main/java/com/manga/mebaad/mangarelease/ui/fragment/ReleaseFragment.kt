@@ -2,7 +2,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
@@ -45,7 +45,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
 
     //region [** INTERFACE METHODS **]
     override fun showListRelease(releases: List<Release>) {
-        release_recycler_view.layoutManager = LinearLayoutManager(activity!!.applicationContext, LinearLayoutManager.HORIZONTAL, false)
+        release_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         release_recycler_view.adapter = ReleaseAdapter(releases) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
     }
     //endregion

@@ -1,6 +1,6 @@
 package com.manga.mebaad.mangarelease.ui.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.data.model.Tome
 import com.squareup.picasso.Picasso
 
-class MangaAdapter(private var tomes: List<Tome>, var visibility : Int,var initArray : Boolean,private val clickListener: (Int, Int, Boolean) -> Unit) : RecyclerView.Adapter<MangaViewHolder>() {
+class MangaAdapter(private var tomes: List<Tome>, var visibility : Int,var initArray : Boolean,private val clickListener: (Int, Int, Boolean) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<MangaViewHolder>() {
 
 
 
@@ -47,7 +47,7 @@ class MangaAdapter(private var tomes: List<Tome>, var visibility : Int,var initA
 }
 
 
-class MangaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class MangaViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     private val titleTomeTextView: TextView = itemView.findViewById(R.id.tome_title_text_view) as TextView
     private val coverTomeImageView: ImageView = itemView.findViewById(R.id.tome_cover_image_view) as ImageView

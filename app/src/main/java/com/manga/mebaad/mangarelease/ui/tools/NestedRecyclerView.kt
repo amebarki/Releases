@@ -2,14 +2,14 @@ package com.manga.mebaad.mangarelease.ui.tools
 
 
 import android.content.Context
-import android.support.v4.view.NestedScrollingParent
-import android.support.v7.widget.RecyclerView
+import androidx.core.view.NestedScrollingParent
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 
 
-open class NestedRecyclerView : RecyclerView, NestedScrollingParent {
+open class NestedRecyclerView : androidx.recyclerview.widget.RecyclerView, NestedScrollingParent {
 
     private var nestedScrollTarget: View? = null
     private var nestedScrollTargetIsBeingDragged = false

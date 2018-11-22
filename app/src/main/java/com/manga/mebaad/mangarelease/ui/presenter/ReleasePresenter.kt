@@ -2,9 +2,9 @@ package com.manga.mebaad.mangarelease.ui.presenter
 
 import com.manga.mebaad.mangarelease.MangaApplication
 import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
-import com.manga.mebaad.mangarelease.domain.UseCase.LoadSeinenKurokawaUseCase
+import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadSeinenKurokawaUseCase
 import com.manga.mebaad.mangarelease.data.model.Release
-import com.manga.mebaad.mangarelease.domain.UseCase.LoadShonenKurokawaUseCase
+import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadShonenKurokawaUseCase
 import com.manga.mebaad.mangarelease.ui.view.ReleaseView
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers

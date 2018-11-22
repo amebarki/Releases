@@ -2,6 +2,7 @@ package com.manga.mebaad.mangarelease
 
 import android.app.Application
 import com.manga.mebaad.mangarelease.api.service.ApiMangaService
+import com.manga.mebaad.mangarelease.bdd.database.MangaDatabase
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,6 +21,7 @@ class MangaApplication : Application() {
 
     companion object {
         private lateinit var apiMangaService : ApiMangaService
+        private lateinit var mangaDatabase: MangaDatabase
         private var instance: MangaApplication? = null
 
         fun instance(): Application {
@@ -29,6 +31,10 @@ class MangaApplication : Application() {
 
         fun getApiMangaService() : ApiMangaService {
             return apiMangaService
+        }
+
+        fun getMangaDatabase() : MangaDatabase {
+            return mangaDatabase
         }
     }
 
@@ -56,6 +62,7 @@ class MangaApplication : Application() {
                 )
                 .build()
         apiMangaService = retrofit.create(ApiMangaService::class.java)
+        mangaDatabase = MangaDatabase.getInstance(this)!!
         Navigator.instance().init()
     }
 

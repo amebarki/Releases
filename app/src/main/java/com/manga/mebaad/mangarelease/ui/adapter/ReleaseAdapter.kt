@@ -1,7 +1,7 @@
 package com.manga.mebaad.mangarelease.ui.adapter
 
 import android.widget.TextView
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.manga.mebaad.mangarelease.data.model.Release
 import com.squareup.picasso.Picasso
 
 
-class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener: (Release,Boolean) -> Unit) : RecyclerView.Adapter<ReleaseViewHolder>() {
+class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener: (Release,Boolean) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<ReleaseViewHolder>() {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, itemType: Int): ReleaseViewHolder {
@@ -33,7 +33,7 @@ class ReleaseAdapter(internal var releaseList: List<Release>, val clickListener:
 }
 
 
-    class ReleaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ReleaseViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
     private val summaryTextView: TextView = itemView.findViewById(R.id.release_summary_text_view_card) as TextView
         private val titleTextView: TextView = itemView.findViewById(R.id.release_title_text_view_card) as TextView

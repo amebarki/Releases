@@ -8,7 +8,6 @@ interface MangaManager {
 
     fun createListRelease(items : List<Item>,category: Category) : List<Release>
 
-
     fun retrieveUrlCover(description : String) : String
 
     fun retrieveSummary(description: String) : String
