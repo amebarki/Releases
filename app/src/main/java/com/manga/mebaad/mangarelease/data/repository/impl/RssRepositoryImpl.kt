@@ -23,5 +23,4 @@ object RssRepositoryImpl : RssRepository {
         return rssObject.map { it.items }
     }
 
-
 }

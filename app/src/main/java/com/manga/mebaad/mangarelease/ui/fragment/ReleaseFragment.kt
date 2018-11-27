@@ -46,7 +46,8 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     //region [** INTERFACE METHODS **]
     override fun showListRelease(releases: List<Release>) {
         release_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
-        release_recycler_view.adapter = ReleaseAdapter(releases) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
+        release_recycler_view.adapter = ReleaseAdapter(releases, true) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
+
     }
     //endregion
 
@@ -78,6 +79,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     //region [** ITEM METHODS **]
     private fun releaseItemClicked(release: Release, isChecked: Boolean) {
         activity!!.showToast("Clicked : ${release.title}, favorite : $isChecked")
+        releasePresenter.addToLibrary(release)
 
     }
     //endregion

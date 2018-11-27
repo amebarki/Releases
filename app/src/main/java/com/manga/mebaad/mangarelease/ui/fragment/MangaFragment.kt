@@ -40,8 +40,6 @@ class MangaFragment : BaseFragment(), MangaView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        mangaPresenter.retrieveManga()
-        mangaPresenter.getAllMangas()
     }
 
     //endregion

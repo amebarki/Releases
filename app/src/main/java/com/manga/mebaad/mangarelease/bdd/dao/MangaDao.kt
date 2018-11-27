@@ -15,8 +15,6 @@ interface MangaDao {
     fun getAll(): Single<List<Manga>>
 
     @Insert(onConflict = REPLACE)
-    fun insert(manga: Manga) : Completable
+    fun insert(manga: Manga) : Single<Long>
 
-//    @Query("DELETE from mangas")
-//    fun deleteAll() : Integer
 }

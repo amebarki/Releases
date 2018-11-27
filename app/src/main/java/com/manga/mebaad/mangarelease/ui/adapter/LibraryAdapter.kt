@@ -25,7 +25,7 @@ class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, 
 
     override fun onBindViewHolder(libraryViewHolder: LibraryViewHolder, position: Int) {
         if(initArray){
-            itemStateArray.clear()
+            LibraryAdapter.itemStateArray.clear()
             initArray = false
         }
 

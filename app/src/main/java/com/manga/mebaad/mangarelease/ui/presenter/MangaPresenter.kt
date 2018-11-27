@@ -48,49 +48,7 @@ class MangaPresenter(val mangaView: MangaView) : BasePresenter() {
     }
 
 
-    fun createManga(manga : Manga){
-        mangaDatabase.MangaDao().insert(manga)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : CompletableObserver{
-                    override fun onComplete() {
-                        mangaView.showError("Complete")
-                    }
 
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onError(e: Throwable) {
-                        mangaView.showError(e.message.toString())
-                    }
-                })
-    }
-
-
-    fun getAllMangas(){
-        mangaDatabase.MangaDao().getAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<List<Manga>>{
-                    override fun onSuccess(mangaList: List<Manga>) {
-                        if(mangaList != null)
-                        {
-                            mangaView.showError("onSuccess : " + mangaList.size.toString())
-                            mangaView.showError("onSuccess : " + mangaList[0].name)
-                            mangaView.showError("onSuccess : " + mangaList[1].name)
-                        }
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-
-                    }
-
-                    override fun onError(e: Throwable) {
-                        mangaView.showError("onError : " + e.message.toString())
-                    }
-                })
-    }
 
     //region [** BASE METHODS **]
     override fun launchEdit() {

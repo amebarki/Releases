@@ -1,8 +1,6 @@
 package com.manga.mebaad.mangarelease.data.manager.contract
 
-import com.manga.mebaad.mangarelease.data.model.Category
-import com.manga.mebaad.mangarelease.data.model.Item
-import com.manga.mebaad.mangarelease.data.model.Release
+import com.manga.mebaad.mangarelease.data.model.*
 
 interface MangaManager {
 
@@ -12,5 +10,8 @@ interface MangaManager {
 
     fun retrieveSummary(description: String) : String
 
-    fun addManga(title : String)
+
+    fun createManga(release : Release) : Manga
+
+    fun findMangaTomes(mangaId : Long,title : String, releaseList : List<Release>) : MutableList<Tome>
 }
