@@ -80,7 +80,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     private fun releaseItemClicked(release: Release, isChecked: Boolean) {
         activity!!.showToast("Clicked : ${release.title}, favorite : $isChecked")
         releasePresenter.addToLibrary(release)
-
+       // releasePresenter.deleteAllTables()
     }
     //endregion
 

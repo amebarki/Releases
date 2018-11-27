@@ -5,10 +5,13 @@ import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
 import com.manga.mebaad.mangarelease.data.manager.contract.MangaManager
 import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.data.model.Release
+import com.manga.mebaad.mangarelease.data.model.Tome
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadSeinenKurokawaUseCase
 import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadShonenKurokawaUseCase
 import com.manga.mebaad.mangarelease.ui.view.ReleaseView
+import io.reactivex.Completable
+import io.reactivex.CompletableObserver
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -60,14 +63,30 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     fun addToLibrary(release: Release) {
 
         var newManga = mangaManager.createManga(release)
-
-        mangaDatabase.MangaDao().insert(newManga).subscribeOn(Schedulers.io())
+        var tomeList = mutableListOf<Tome>()
+        mangaDatabase.MangaDao().insertManga(newManga).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Long> {
                     override fun onSuccess(t: Long) {
                         // find Tomes of the new manga
                         releaseView.showError("onSuccess id insert: " + t.toString())
+                        tomeList = mangaManager.findMangaTomes(t, newManga.name, releasesList)
+                        mangaDatabase.MangaDao().insertTomes(tomeList).subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object : SingleObserver<List<Long>>{
+                                    override fun onSuccess(t: List<Long>) {
+                                        releaseView.showError("onSuccess size : " + t.size)
+                                    }
+
+                                    override fun onSubscribe(d: Disposable) {
+                                    }
+
+                                    override fun onError(e: Throwable) {
+                                        releaseView.showError("onError")
+                                    }
+                                })
                     }
+
                     override fun onSubscribe(d: Disposable) {
 
                     }
@@ -80,7 +99,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
 
 
     fun getAllMangas() {
-        mangaDatabase.MangaDao().getAll()
+        mangaDatabase.MangaDao().getAllManga()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Manga>> {
@@ -98,6 +117,25 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
 
                     override fun onError(e: Throwable) {
                         releaseView.showError("onError : " + e.message.toString())
+                    }
+                })
+    }
+
+
+    fun deleteAllTables() {
+        Completable.fromAction(mangaDatabase.MangaDao()::deleteMangaTable)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : CompletableObserver {
+                    override fun onComplete() {
+                        releaseView.showError("onSuccess")
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                    }
+
+                    override fun onError(e: Throwable) {
+                        releaseView.showError("onError")
                     }
                 })
     }

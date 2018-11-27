@@ -8,9 +8,10 @@ import androidx.room.TypeConverters
 import com.manga.mebaad.mangarelease.data.bdd.dao.MangaDao
 import com.manga.mebaad.mangarelease.data.model.CategoryConverter
 import com.manga.mebaad.mangarelease.data.model.Manga
+import com.manga.mebaad.mangarelease.data.model.Tome
 
 @TypeConverters(CategoryConverter::class)
-@Database(entities = [Manga::class], version = 3)
+@Database(entities = [Manga::class, Tome::class], version = 4)
 abstract class MangaDatabase : RoomDatabase(){
 
     abstract fun MangaDao(): MangaDao
