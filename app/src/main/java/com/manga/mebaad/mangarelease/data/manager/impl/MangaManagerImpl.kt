@@ -6,7 +6,6 @@ import com.manga.mebaad.mangarelease.data.model.*
 
 class MangaManagerImpl : MangaManager {
 
-
     override fun createListRelease(items: List<Item>, category: Category): List<Release> {
 
         val releases: MutableList<Release> = mutableListOf()
@@ -79,4 +78,18 @@ class MangaManagerImpl : MangaManager {
         return tomesList
     }
 
+
+    override fun checkFavoriteRelease(mangaList: List<Manga>, releaseList: List<Release>): List<Int> {
+
+        var statusList = mutableListOf<Int>()
+
+        for (manga in mangaList) {
+            for((index,release) in releaseList.withIndex()){
+                if(release.title.contains(manga.name, true)){
+                    statusList.add(index)
+                }
+            }
+        }
+        return statusList
+    }
 }

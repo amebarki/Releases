@@ -2,7 +2,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.util.Log
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_release.*
 
 class ReleaseFragment : BaseFragment(), ReleaseView {
 
-
     private lateinit var releasePresenter: ReleasePresenter
     private lateinit var releaseMenu: Menu
 
@@ -29,6 +28,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
                               savedInstanceState: Bundle?): View? {
         overwriteToolbar()
         releasePresenter = Navigator.instance().initReleasePresenter(this)
+        Log.e("ReleaseFragment", "Second Begin")
 
         return inflater.inflate(R.layout.fragment_release, container, false)
     }
@@ -37,18 +37,32 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-
+        Log.e("ReleaseFragment", "Begin")
         releasePresenter.loadSeinenKurokawa()
         releasePresenter.loadShonenKurokawa()
     }
     //endregion
 
+
     //region [** INTERFACE METHODS **]
     override fun showListRelease(releases: List<Release>) {
         release_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         release_recycler_view.adapter = ReleaseAdapter(releases, true) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
+        releasePresenter.checkFavoriteManga()
 
     }
+
+    override fun updateStatusRelease(statusList: List<Int>) {
+        Log.e("ReleaseFragment", "update status")
+        // update position of release already in favorite
+        Log.e("ReleaseFragment","size : ${statusList.size}")
+        for (status in statusList) {
+            Log.d("ReleaseAdapter","status : $status")
+            ReleaseAdapter.itemStateArray.append(status,true)
+            release_recycler_view.adapter!!.notifyItemChanged(status)
+        }
+    }
+
     //endregion
 
     //region [** OPTION MENU METHODS **]
@@ -80,7 +94,6 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     private fun releaseItemClicked(release: Release, isChecked: Boolean) {
         activity!!.showToast("Clicked : ${release.title}, favorite : $isChecked")
         releasePresenter.addToLibrary(release)
-       // releasePresenter.deleteAllTables()
     }
     //endregion
 

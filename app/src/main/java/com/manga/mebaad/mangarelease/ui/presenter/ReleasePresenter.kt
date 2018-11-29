@@ -73,7 +73,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                         tomeList = mangaManager.findMangaTomes(t, newManga.name, releasesList)
                         mangaDatabase.MangaDao().insertTomes(tomeList).subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(object : SingleObserver<List<Long>>{
+                                .subscribe(object : SingleObserver<List<Long>> {
                                     override fun onSuccess(t: List<Long>) {
                                         releaseView.showError("onSuccess size : " + t.size)
                                     }
@@ -97,17 +97,14 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                 })
     }
 
-
-    fun getAllMangas() {
+    fun checkFavoriteManga() {
         mangaDatabase.MangaDao().getAllManga()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Manga>> {
                     override fun onSuccess(mangaList: List<Manga>) {
                         if (mangaList != null) {
-                            releaseView.showError("onSuccess : " + mangaList.size.toString())
-                            releaseView.showError("onSuccess : " + mangaList[2].name)
-                            releaseView.showError("onSuccess : " + mangaList[3].name)
+                            releaseView.updateStatusRelease(mangaManager.checkFavoriteRelease(mangaList, releasesList))
                         }
                     }
 

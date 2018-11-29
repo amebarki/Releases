@@ -3,6 +3,7 @@ package com.manga.mebaad.mangarelease.ui.adapter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +37,7 @@ class ReleaseAdapter(internal var releaseList: List<Release>, var initArray : Bo
 
         val release = releaseList[position]
         releaseViewHolder.bind(release,clickListener)
+        Log.d("ReleaseAdapter","isChecked : " + itemStateArray.get(position).toString())
         releaseViewHolder.favoriteCheckBox.isChecked = itemStateArray.get(position, false)
     }
 

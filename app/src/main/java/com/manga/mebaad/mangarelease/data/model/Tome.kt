@@ -1,11 +1,10 @@
 package com.manga.mebaad.mangarelease.data.model
 
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "tomes")
-data class Tome(@PrimaryKey(autoGenerate = false) val id: Int,
+@Entity(tableName = "tomes",primaryKeys = ["id","mangaId"])
+data class Tome(val id: Int,
                 val mangaId: Long,
                 val description: String,
                 val urlCover: String) {

@@ -10,8 +10,9 @@ interface MangaManager {
 
     fun retrieveSummary(description: String) : String
 
-
     fun createManga(release : Release) : Manga
 
     fun findMangaTomes(mangaId : Long,title : String, releaseList : List<Release>) : MutableList<Tome>
+
+    fun checkFavoriteRelease(mangaList : List<Manga>,releaseList : List<Release>) : List<Int>
 }
