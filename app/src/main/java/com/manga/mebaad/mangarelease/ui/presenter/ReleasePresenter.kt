@@ -35,6 +35,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                 .subscribe(object : SingleObserver<List<Release>> {
                     override fun onSuccess(seinenReleases: List<Release>) {
                         releasesList.addAll(seinenReleases)
+                        loadShonenKurokawa()
                     }
 
                     override fun onSubscribe(d: Disposable) {
@@ -101,14 +102,13 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     }
 
     fun checkFavoriteManga() {
+        e("favorite","check favorite manga")
         mangaDatabase.MangaDao().getAllManga()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<List<Manga>> {
                     override fun onSuccess(mangaList: List<Manga>) {
-                        if (mangaList != null) {
                             releaseView.updateStatusRelease(mangaManager.checkFavoriteRelease(mangaList, releasesList))
-                        }
                     }
 
                     override fun onSubscribe(d: Disposable) {

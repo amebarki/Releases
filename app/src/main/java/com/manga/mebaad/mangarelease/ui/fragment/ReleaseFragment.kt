@@ -3,6 +3,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.e
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
@@ -28,7 +29,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
                               savedInstanceState: Bundle?): View? {
         overwriteToolbar()
         releasePresenter = Navigator.instance().initReleasePresenter(this)
-        Log.e("ReleaseFragment", "Second Begin")
+        e("ReleaseFragment", "Second Begin")
 
         return inflater.inflate(R.layout.fragment_release, container, false)
     }
@@ -37,9 +38,9 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        Log.e("ReleaseFragment", "Begin")
+        e("ReleaseFragment", "Begin")
         releasePresenter.loadSeinenKurokawa()
-        releasePresenter.loadShonenKurokawa()
+        //releasePresenter.loadShonenKurokawa()
     }
     //endregion
 
@@ -48,16 +49,15 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     override fun showListRelease(releases: List<Release>) {
         release_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(activity!!.applicationContext, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL, false)
         release_recycler_view.adapter = ReleaseAdapter(releases, true) { release: Release, isChecked: Boolean -> releaseItemClicked(release, isChecked) }
+        e("favorite","show list release method")
         releasePresenter.checkFavoriteManga()
 
     }
 
     override fun updateStatusRelease(statusList: List<Int>) {
-        Log.e("ReleaseFragment", "update status")
-        // update position of release already in favorite
-        Log.e("ReleaseFragment","size : ${statusList.size}")
+        e("favorite", "update status")
+        e("favorite","size : ${statusList.size}")
         for (status in statusList) {
-            Log.d("ReleaseAdapter","status : $status")
             ReleaseAdapter.itemStateArray.append(status,true)
             release_recycler_view.adapter!!.notifyItemChanged(status)
         }
