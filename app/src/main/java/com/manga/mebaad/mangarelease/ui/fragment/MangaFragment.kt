@@ -40,6 +40,7 @@ class MangaFragment : BaseFragment(), MangaView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+        mangaPresenter.retrieveManga()
     }
 
     //endregion
@@ -51,7 +52,7 @@ class MangaFragment : BaseFragment(), MangaView {
 
         manga_grid_layout.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity!!.applicationContext, 3)
         manga_grid_layout.adapter = mangaAdapter
-        manga_title_text_view.text = "Example of Manga"
+        manga_title_text_view.text = "Vinland Saga"
 
     }
 

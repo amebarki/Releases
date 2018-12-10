@@ -34,10 +34,8 @@ class ReleaseAdapter(internal var releaseList: List<Release>, var initArray : Bo
             initArray = false
         }
 
-
         val release = releaseList[position]
         releaseViewHolder.bind(release,clickListener)
-        Log.d("ReleaseAdapter","isChecked : " + itemStateArray.get(position).toString())
         releaseViewHolder.favoriteCheckBox.isChecked = itemStateArray.get(position, false)
     }
 

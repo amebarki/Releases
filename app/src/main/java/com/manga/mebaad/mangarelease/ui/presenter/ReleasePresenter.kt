@@ -1,5 +1,8 @@
 package com.manga.mebaad.mangarelease.ui.presenter
 
+import android.annotation.SuppressLint
+import android.util.Log.d
+import android.util.Log.e
 import com.manga.mebaad.mangarelease.MangaApplication
 import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
 import com.manga.mebaad.mangarelease.data.manager.contract.MangaManager
@@ -10,8 +13,7 @@ import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadSeinenKurokawaUseCase
 import com.manga.mebaad.mangarelease.domain.RssUseCase.LoadShonenKurokawaUseCase
 import com.manga.mebaad.mangarelease.ui.view.ReleaseView
-import io.reactivex.Completable
-import io.reactivex.CompletableObserver
+import io.reactivex.Maybe
 import io.reactivex.SingleObserver
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -71,6 +73,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                         // find Tomes of the new manga
                         releaseView.showError("onSuccess id insert: " + t.toString())
                         tomeList = mangaManager.findMangaTomes(t, newManga.name, releasesList)
+
                         mangaDatabase.MangaDao().insertTomes(tomeList).subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(object : SingleObserver<List<Long>> {
@@ -119,23 +122,13 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     }
 
 
+    @SuppressLint("CheckResult")
     fun deleteAllTables() {
-        Completable.fromAction(mangaDatabase.MangaDao()::deleteMangaTable)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : CompletableObserver {
-                    override fun onComplete() {
-                        releaseView.showError("onSuccess")
-                    }
-
-                    override fun onSubscribe(d: Disposable) {
-                    }
-
-                    override fun onError(e: Throwable) {
-                        releaseView.showError("onError")
-                    }
-                })
-    }
+        releaseView.showError("Manga : deleteAllTables")
+        Maybe.fromAction<Unit>(mangaDatabase.MangaDao()::deleteMangaTable)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+ }
 
     //region [** BASE METHODS **]
     override fun launchEdit() {

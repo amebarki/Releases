@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.data.model.Tome
+import io.reactivex.Completable
 import io.reactivex.Single
 
 @Dao

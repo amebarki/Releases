@@ -11,7 +11,7 @@ import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.data.model.Tome
 
 @TypeConverters(CategoryConverter::class)
-@Database(entities = [Manga::class, Tome::class], version = 5)
+@Database(entities = [Manga::class, Tome::class], version = 6)
 abstract class MangaDatabase : RoomDatabase(){
 
     abstract fun MangaDao(): MangaDao

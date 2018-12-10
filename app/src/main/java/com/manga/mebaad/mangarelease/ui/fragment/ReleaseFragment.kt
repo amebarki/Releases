@@ -84,6 +84,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
 
         if (item.itemId == R.id.action_sort) {
             activity!!.showToast("Sort Action")
+            releasePresenter.deleteAllTables()
         }
         return super.onOptionsItemSelected(item)
     }
