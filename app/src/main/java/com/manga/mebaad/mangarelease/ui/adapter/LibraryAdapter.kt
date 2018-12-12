@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import com.manga.mebaad.mangarelease.R
+import com.manga.mebaad.mangarelease.data.model.Manga
 import com.manga.mebaad.mangarelease.ui.adapter.LibraryAdapter.Companion.itemStateArray
 
-class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, var initArray : Boolean, private val clickListener: (String, Int, Boolean) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<LibraryViewHolder>() {
+class LibraryAdapter(private var mangaList: List<Manga>, var visibility : Int, var initArray : Boolean, private val clickListener: (String, Int, Boolean) -> Unit) : androidx.recyclerview.widget.RecyclerView.Adapter<LibraryViewHolder>() {
 
 
     companion object {
@@ -30,8 +31,8 @@ class LibraryAdapter(private var mangaList: List<String>, var visibility : Int, 
         }
 
 
-        val mangaTitle = mangaList[position]
-        libraryViewHolder.bind(mangaTitle, position, clickListener)
+        val manga = mangaList[position]
+        libraryViewHolder.bind(manga.name, position, clickListener)
         libraryViewHolder.deleteCheckbox.isChecked = itemStateArray.get(position, true)
         libraryViewHolder.deleteCheckbox.visibility = visibility
     }
