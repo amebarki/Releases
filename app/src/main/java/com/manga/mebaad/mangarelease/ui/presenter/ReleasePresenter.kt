@@ -63,7 +63,28 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                 })
     }
 
-    fun addToLibrary(release: Release) {
+    fun checkFavoriteManga() {
+        e("favorite", "check favorite manga")
+        mangaDatabase.MangaDao().getAllManga()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<List<Manga>> {
+                    override fun onSuccess(mangaList: List<Manga>) {
+                        addFavoriteMangaTomes(mangaList)
+                        releaseView.updateStatusRelease(mangaManager.checkFavoriteRelease(mangaList, releasesList))
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        releaseView.showError("onError : " + e.message.toString())
+                    }
+                })
+    }
+
+    fun addNewMangaToLibrary(release: Release) {
 
         var newManga = mangaManager.createManga(release)
         var tomeList = mutableListOf<Tome>()
@@ -101,24 +122,28 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
                 })
     }
 
-    fun checkFavoriteManga() {
-        e("favorite","check favorite manga")
-        mangaDatabase.MangaDao().getAllManga()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : SingleObserver<List<Manga>> {
-                    override fun onSuccess(mangaList: List<Manga>) {
-                            releaseView.updateStatusRelease(mangaManager.checkFavoriteRelease(mangaList, releasesList))
-                    }
+    fun addFavoriteMangaTomes(mangaList: List<Manga>) {
+        //todo  get favorite manga from db
+        //todo  find new tomes from this manga
+        //todo  insert new tomes in db
+        // todo see after to replace with nullable val
+        for (manga in mangaList) {
+            val tomeList = mangaManager.findMangaTomes(manga.id, manga.name, releasesList)
+            mangaDatabase.MangaDao().insertTomes(tomeList).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : SingleObserver<List<Long>> {
+                        override fun onSuccess(t: List<Long>) {
+                            releaseView.showError("insert tome size : ${t.size}")
+                        }
 
-                    override fun onSubscribe(d: Disposable) {
+                        override fun onSubscribe(d: Disposable) {
+                        }
 
-                    }
-
-                    override fun onError(e: Throwable) {
-                        releaseView.showError("onError : " + e.message.toString())
-                    }
-                })
+                        override fun onError(e: Throwable) {
+                            releaseView.showError(e.message.toString())
+                        }
+                    })
+        }
     }
 
 
@@ -126,9 +151,9 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     fun deleteAllTables() {
         releaseView.showError("Manga : deleteAllTables")
         Maybe.fromAction<Unit>(mangaDatabase.MangaDao()::deleteMangaTable)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
- }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+    }
 
     //region [** BASE METHODS **]
     override fun launchEdit() {

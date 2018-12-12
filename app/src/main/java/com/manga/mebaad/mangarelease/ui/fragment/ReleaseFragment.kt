@@ -2,7 +2,6 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Log.e
 import android.view.*
 import com.manga.mebaad.mangarelease.R
@@ -38,9 +37,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        e("ReleaseFragment", "Begin")
         releasePresenter.loadSeinenKurokawa()
-        //releasePresenter.loadShonenKurokawa()
     }
     //endregion
 
@@ -94,7 +91,7 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
     //region [** ITEM METHODS **]
     private fun releaseItemClicked(release: Release, isChecked: Boolean) {
         activity!!.showToast("Clicked : ${release.title}, favorite : $isChecked")
-        releasePresenter.addToLibrary(release)
+        releasePresenter.addNewMangaToLibrary(release)
     }
     //endregion
 

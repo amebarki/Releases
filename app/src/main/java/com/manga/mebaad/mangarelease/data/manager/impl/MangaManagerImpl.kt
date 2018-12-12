@@ -81,10 +81,7 @@ class MangaManagerImpl : MangaManager {
 
 
     override fun checkFavoriteRelease(mangaList: List<Manga>, releaseList: List<Release>): List<Int> {
-        e("favorite", "check favorite release")
         var statusList = mutableListOf<Int>()
-        e("favorite","manga size : ${mangaList.size}")
-        e("favorite","release size : ${releaseList.size}")
         for (manga in mangaList) {
             for((index,release) in releaseList.withIndex()){
                 if(release.title.contains(manga.name, true)){
@@ -92,7 +89,6 @@ class MangaManagerImpl : MangaManager {
                 }
             }
         }
-        e("favorite","status size : ${statusList.size}")
         return statusList
     }
 }
