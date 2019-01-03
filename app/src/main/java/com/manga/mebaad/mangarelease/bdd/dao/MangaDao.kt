@@ -16,6 +16,12 @@ interface MangaDao {
     @Query("SELECT * from mangas")
     fun getAllManga(): Single<List<Manga>>
 
+    @Query("SELECT * FROM mangas WHERE name = :title")
+    fun getManga(title : String) : Single<Manga>
+
+    @Query("SELECT * FROM tomes WHERE mangaId = :idManga")
+    fun getTomes(idManga : Long) : Single<List<Tome>>
+
     @Insert(onConflict = ABORT)
     fun insertManga(manga: Manga): Single<Long>
 

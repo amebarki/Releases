@@ -1,5 +1,7 @@
 package com.manga.mebaad.mangarelease.ui.presenter
 
+import android.util.Log
+import android.util.Log.d
 import android.view.View
 import com.manga.mebaad.mangarelease.MangaApplication
 import com.manga.mebaad.mangarelease.base.presenter.BasePresenter
@@ -23,6 +25,40 @@ class MangaPresenter(val mangaView: MangaView) : BasePresenter() {
     fun retrieveManga() {
         initTomes()
         mangaView.displayMangas(tomes)
+    }
+
+    fun retrieveManga(title : String){
+        mangaDatabase.MangaDao().getManga(title)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : SingleObserver<Manga> {
+                    override fun onSuccess(manga: Manga) {
+                        d("MangaFragment : ",manga.name)
+                        d("MangaFragment : ",manga.id.toString())
+                        d("MangaFragment : ",manga.category.toString())
+
+                        mangaDatabase.MangaDao().getTomes(manga.id)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object  : SingleObserver<List<Tome>>{
+                                    override fun onSuccess(tomes: List<Tome>) {
+                                        d("MangaFragment","size : " + tomes.size.toString())
+                                        mangaView.displayMangas(tomes.sortedWith(compareBy {it.id}))
+                                    }
+                                    override fun onSubscribe(d: Disposable) {
+                                    }
+                                    override fun onError(e: Throwable) {
+                                        Log.e("onError",e.message)
+                                    }
+                                })
+                    }
+                    override fun onSubscribe(d: Disposable) {
+                    }
+                    override fun onError(e: Throwable) {
+                        Log.e("MangaFragment : ",e.message)
+                    }
+                })
+
     }
 
     private fun initTomes() {

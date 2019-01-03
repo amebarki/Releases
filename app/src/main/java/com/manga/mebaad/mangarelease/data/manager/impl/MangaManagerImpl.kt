@@ -1,7 +1,6 @@
 package com.manga.mebaad.mangarelease.data.manager.impl
 
 import android.util.Log
-import android.util.Log.e
 import com.manga.mebaad.mangarelease.data.manager.contract.MangaManager
 import com.manga.mebaad.mangarelease.data.model.*
 
@@ -52,16 +51,12 @@ class MangaManagerImpl : MangaManager {
 
     fun getMangaName(title: String): String {
         val regex = """\s-\s(tome)\s[0-9]*""".toRegex()
-        val matchResult = regex.replace(title, "")
-        return if (matchResult != null) {
-            matchResult
-        } else
-            ""
+        return regex.replace(title, "")
     }
 
 
     override fun createManga(release: Release): Manga {
-        var manga: Manga = Manga(getMangaName(release.title), release.category, mutableListOf())
+        val manga: Manga = Manga(getMangaName(release.title), release.category, mutableListOf())
         return manga
     }
 

@@ -2,6 +2,7 @@ package com.manga.mebaad.mangarelease.ui.fragment
 
 
 import android.os.Bundle
+import android.util.Log.d
 import android.view.*
 import com.manga.mebaad.mangarelease.R
 import com.manga.mebaad.mangarelease.base.activity.showToast
@@ -40,7 +41,10 @@ class MangaFragment : BaseFragment(), MangaView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        mangaPresenter.retrieveManga()
+        val dataArgs = MangaFragmentArgs.fromBundle(arguments!!)
+        val title = dataArgs.manga
+        d("MangaFragment",title)
+        mangaPresenter.retrieveManga(title)
     }
 
     //endregion

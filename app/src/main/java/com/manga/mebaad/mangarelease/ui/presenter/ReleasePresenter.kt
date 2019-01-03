@@ -87,7 +87,7 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     fun addNewMangaToLibrary(release: Release) {
 
         var newManga = mangaManager.createManga(release)
-        var tomeList = mutableListOf<Tome>()
+        var tomeList: MutableList<Tome>
         mangaDatabase.MangaDao().insertManga(newManga).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : SingleObserver<Long> {

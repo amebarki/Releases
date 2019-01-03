@@ -22,11 +22,15 @@
         tools:layout="@layout/fragment_library" >
         <action
             android:id="@+id/action_libraryFragment_to_mangaFragment"
-            app:destination="@+id/mangaFragment" />
+            app:destination="@id/mangaFragment" />
     </fragment>
     <fragment
         android:id="@+id/mangaFragment"
         android:name="com.manga.mebaad.mangarelease.ui.fragment.MangaFragment"
         android:label="fragment_manga"
-        tools:layout="@layout/fragment_manga" />
+        tools:layout="@layout/fragment_manga" >
+        <argument
+            android:name="manga"
+            app:argType="string" />
+    </fragment>
 </navigation>
