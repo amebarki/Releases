@@ -1,6 +1,7 @@
 package com.manga.mebaad.mangarelease.data.manager.impl
 
 import android.util.Log
+import android.util.Log.e
 import com.manga.mebaad.mangarelease.data.manager.contract.MangaManager
 import com.manga.mebaad.mangarelease.data.model.*
 
@@ -54,12 +55,10 @@ class MangaManagerImpl : MangaManager {
         return regex.replace(title, "")
     }
 
-
     override fun createManga(release: Release): Manga {
         val manga: Manga = Manga(getMangaName(release.title), release.category, mutableListOf())
         return manga
     }
-
 
     override fun findMangaTomes(mangaId: Long, title: String, releaseList: List<Release>): MutableList<Tome> {
         Log.d("findMangaTomes : ", title)
@@ -74,16 +73,31 @@ class MangaManagerImpl : MangaManager {
         return tomesList
     }
 
-
     override fun checkFavoriteRelease(mangaList: List<Manga>, releaseList: List<Release>): List<Int> {
         var statusList = mutableListOf<Int>()
         for (manga in mangaList) {
-            for((index,release) in releaseList.withIndex()){
-                if(release.title.contains(manga.name, true)){
+            for ((index, release) in releaseList.withIndex()) {
+                if (release.title.contains(manga.name, true)) {
                     statusList.add(index)
                 }
             }
         }
         return statusList
     }
+
+    override fun sortReleases(releaseList: List<Release>, option: Int): MutableList<Release> {
+
+
+        when (option) {
+            1 -> e("SORT", "NO FILTER")
+            1 -> e("SORT", "ALPH DESC")
+            2 -> e("SORT", "ALPH ASC")
+            3 -> e("SORT", "ONLY FAV")
+            4 -> e("SORT", "WITHOUT FAV")
+        }
+
+        return mutableListOf()
+    }
+
+
 }

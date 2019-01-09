@@ -20,6 +20,9 @@
 
     <!-- Manga Part -->
     <string name="tome_name">TOME %1$d</string>
+    <string name="dialog_alphabetic">Alphabetic</string>
+    <string name="dialog_alp_desc">DESC</string>
+    <string name="dialog_alp_asc">ASC</string>
 
     <!-- Library Part -->
 </resources>

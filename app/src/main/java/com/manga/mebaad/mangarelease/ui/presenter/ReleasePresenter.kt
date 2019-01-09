@@ -147,6 +147,10 @@ class ReleasePresenter(val releaseView: ReleaseView) : BasePresenter() {
     }
 
 
+    fun sortReleases(){
+
+    }
+
     @SuppressLint("CheckResult")
     fun deleteAllTables() {
         releaseView.showError("Manga : deleteAllTables")

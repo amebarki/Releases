@@ -15,4 +15,6 @@ interface MangaManager {
     fun findMangaTomes(mangaId : Long,title : String, releaseList : List<Release>) : MutableList<Tome>
 
     fun checkFavoriteRelease(mangaList : List<Manga>,releaseList : List<Release>) : List<Int>
+
+    fun sortReleases(releaseList: List<Release>, option : Int) : MutableList<Release>
 }

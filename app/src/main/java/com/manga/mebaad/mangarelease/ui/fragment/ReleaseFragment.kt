@@ -11,6 +11,7 @@ import com.manga.mebaad.mangarelease.data.model.Release
 import com.manga.mebaad.mangarelease.data.navigator.Navigator
 import com.manga.mebaad.mangarelease.ui.adapter.ReleaseAdapter
 import com.manga.mebaad.mangarelease.ui.presenter.ReleasePresenter
+import com.manga.mebaad.mangarelease.ui.tools.SortDialogFragment
 import com.manga.mebaad.mangarelease.ui.view.ReleaseView
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.fragment_release.*
@@ -81,7 +82,8 @@ class ReleaseFragment : BaseFragment(), ReleaseView {
 
         if (item.itemId == R.id.action_sort) {
             activity!!.showToast("Sort Action")
-            releasePresenter.deleteAllTables()
+            val dialog = SortDialogFragment()
+            dialog.show(activity?.supportFragmentManager,"")
         }
         return super.onOptionsItemSelected(item)
     }
